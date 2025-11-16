@@ -98,8 +98,8 @@ exports.admin_login = async (id, password) => {
       if (result) {
         return jwt.sign(
           {
-            sub: id,
-            admin: admin.hierachy,
+            sub: admin._id,
+            h: admin.hierachy,
           },
           process.env.JWT_SECRET,
           { expiresIn: "1d" }
