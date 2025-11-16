@@ -8,7 +8,8 @@ module.exports = () => {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.JWT_SECRET,
       },
-      (jwt_payload, done) => done(null, { id: jwt_payload.sub })
+      (jwt_payload, done) =>
+        done(null, { id: jwt_payload.sub, admin: jwt_payload.h < 5 })
     )
   );
 };
