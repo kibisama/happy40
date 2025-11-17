@@ -12,7 +12,6 @@ app.use(morgan("combined"));
 if (process.env.NODE_ENV === "production") {
   const helmet = require("helmet");
   const hpp = require("hpp");
-
   app.use(
     helmet({
       contentSecurityPolicy: false,
@@ -30,13 +29,20 @@ const passport = require("passport");
 require("./passport")();
 app.use(passport.initialize());
 
+const uap = require("ua-parser-js");
 const router = require("./routes");
-app.use("/", router);
+app.use(
+  "/",
+  (req, res, next) => {
+    req.ua = uap(req.headers["user-agent"]);
+    next();
+  },
+  router
+);
 
-// const logger = require("./logger");
+const { error_logger } = require("./logger");
 app.use((e, req, res, next) => {
-  console.error(e);
-  // logger(e, req.ip);
+  e.logger ? error_logger(e, req) : console.error(e);
   return res.sendStatus(e.status || 500);
 });
 

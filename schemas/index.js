@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const logger = require("../logger");
+const { error_logger } = require("../logger");
 
 const connect = () => {
   if (process.env.NODE_ENV !== "production") {
@@ -9,12 +9,12 @@ const connect = () => {
     .connect(process.env.MONGODB_ADDRESS, {
       dbName: "happy40",
     })
-    .catch((e) => logger(e));
+    .catch((e) => error_logger(e));
 };
 
-mongoose.connection.on("error", (e) => logger(e));
+mongoose.connection.on("error", (e) => error_logger(e));
 mongoose.connection.on("disconnected", () => {
-  logger(e);
+  error_logger(e);
   connect();
 });
 

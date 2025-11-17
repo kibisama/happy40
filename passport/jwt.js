@@ -6,7 +6,7 @@ module.exports = () => {
     new JwtStrategy(
       {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: process.env.JWT_SECRET,
+        secretOrKey: process.env.JWT_ACCESS_TOKEN_SECRET,
       },
       (jwt_payload, done) =>
         done(null, { id: jwt_payload.sub, admin: jwt_payload.h < 5 })

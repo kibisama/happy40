@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     if (authError) {
       return next(authError);
     }
-    if (info.name === "TokenExpiredError") {
+    if (info?.name === "TokenExpiredError") {
       return res.sendStatus(419);
     }
     if (!user.admin) {
