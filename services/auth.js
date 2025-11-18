@@ -96,5 +96,6 @@ exports.refresh_token = async (refresh_token) => {
     }
   } else {
     // for clients
+    throw { status: 401 };
   }
 };

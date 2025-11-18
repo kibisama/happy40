@@ -23,7 +23,6 @@ const roomSchema = new mongoose.Schema(
       enum: ["F", "M", "U"],
       required: true,
       default: "F",
-      // index: true,
     },
     description: String,
     memo: String,
@@ -32,17 +31,30 @@ const roomSchema = new mongoose.Schema(
     occupants: [{ type: ObjectId, ref: "Client" }],
     waitings: [{ type: ObjectId, ref: "Client" }],
   },
-  { timestamps: true }
+  { timestamps: true, optimisticConcurrency: true }
 );
 const model = mongoose.model(
   "Room",
   roomSchema.index({ branch: 1, name: 1 }, { unique: true })
 );
 /**
- * @typedef {Awaited<ReturnType<model["create"]>>[0]} Room
- * @typedef {typeof model.schema.obj} RoomSchema
  * @typedef {"OPEN"|"OCCUPIED"|"RESERVED"|"CLOSED"} Status
  * @typedef {"F"|"M"|"U"} Gender
+ * @typedef {object} Room
+ * @property {import("mongoose").ObjectId|string} branch
+ * @property {string} name
+ * @property {Status} [status]
+ * @property {string} [rent]
+ * @property {string} [deposit]
+ * @property {string} [size]
+ * @property {Gender} [gender]
+ * @property {string} [description]
+ * @property {string} [memo]
+ * @property {number} [max_occupants]
+ * @property {import("mongoose").ObjectId|string} [prime_occupant]
+ * @property {[import("mongoose").ObjectId|string]} [occupants]
+ * @property {[import("mongoose").ObjectId|string]} [waitings]
+ * @typedef {ReturnType<model["hydrate"]>} RoomDocument
  */
 
 module.exports = model;

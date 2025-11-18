@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const branch = require("../../controllers/admin/branch");
+const branch = require("../controllers/branch");
 
 router.get("/", branch.getBranches);
-router.post("/", branch.postBranch);
 
 module.exports = router;

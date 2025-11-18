@@ -16,8 +16,11 @@ const adminSchema = new mongoose.Schema(
 );
 const model = mongoose.model("Admin", adminSchema);
 /**
- * @typedef {Awaited<ReturnType<model["create"]>>[0]} Admin
- * @typedef {typeof model.schema.obj} AdminSchema
+ * @typedef {object} Admin
+ * @property {string} id
+ * @property {string} password
+ * @property {0|1|2|3} [hierachy]
+ * @property {string} name
+ * @typedef {ReturnType<model["hydrate"]>} AdminDocument
  */
-
 module.exports = model;

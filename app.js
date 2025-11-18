@@ -29,6 +29,8 @@ const passport = require("passport");
 require("./passport")();
 app.use(passport.initialize());
 
+const compression = require("compression");
+app.use(compression());
 const uap = require("ua-parser-js");
 const router = require("./routes");
 app.use(

@@ -22,6 +22,9 @@ module.exports = (e, req, res, next) => {
         status = 401;
         // auditlog
         break;
+      case "ValidationError":
+        // mongo validation error
+        status = 400;
       default:
     }
   }
