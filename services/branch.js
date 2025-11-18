@@ -1,13 +1,12 @@
 const Branch = require("../schemas/branch");
 
 /**
- * @param {string} name
- * @returns {}
+ * @param {Branch.BranchSchema} branch_schema
+ * @returns {Promise<Branch.Branch>}
  */
-exports.createBranch = async (name) => {
-  try {
-    return await Branch.create({ name });
-  } catch (e) {
-    throw e;
+exports.createBranch = async (branch_schema) => {
+  if (!(branch_schema.name && branch_schema.address && branch_schema.contact)) {
+    throw { status: 400 };
   }
+  return await Branch.create(branch_schema);
 };

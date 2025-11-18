@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const admin = require("../../controllers/admin");
 
-router.use("/", admin);
+// router.use("/", admin);
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (

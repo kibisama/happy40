@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { error_logger } = require("../logger");
+const { error_logger } = require("../loggers");
 
 const connect = () => {
   if (process.env.NODE_ENV !== "production") {

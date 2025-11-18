@@ -15,7 +15,6 @@ fs.readdirSync(__dirname)
   .forEach((file) => {
     router.use("/" + file.slice(0, -3), require(path.join(__dirname, file)));
   });
-
 router.use("/admin", require("./admin"));
 
 module.exports = router;

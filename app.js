@@ -39,12 +39,7 @@ app.use(
   },
   router
 );
-
-const { error_logger } = require("./logger");
-app.use((e, req, res, next) => {
-  e.logger ? error_logger(e, req) : console.error(e);
-  return res.sendStatus(e.status || 500);
-});
+app.use(require("./error_handler"));
 
 app.listen(app.get("port"), () =>
   console.log(app.get("port"), "번 포트에서 대기 중")

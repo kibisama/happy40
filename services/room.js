@@ -10,9 +10,8 @@ const Room = require("../schemas/room");
  * @returns {}
  */
 exports.createRoom = async (name, branch) => {
-  try {
-    return await Room.create({ name, branch });
-  } catch (e) {
-    throw e;
+  if (!(name && branch)) {
+    throw { status: 400 };
   }
+  return await Room.create({ name, branch });
 };

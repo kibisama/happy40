@@ -9,7 +9,7 @@ module.exports = () => {
         secretOrKey: process.env.JWT_ACCESS_TOKEN_SECRET,
       },
       (jwt_payload, done) =>
-        done(null, { id: jwt_payload.sub, admin: jwt_payload.h < 5 })
+        done(null, { id: jwt_payload.sub, admin: jwt_payload.h < 4 })
     )
   );
 };

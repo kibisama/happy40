@@ -5,6 +5,7 @@ module.exports = (req, res, next) => {
     if (authError) {
       return next(authError);
     }
+    // 에러핸들러로 넘기도록하자
     if (info?.name === "TokenExpiredError") {
       return res.sendStatus(419);
     }
